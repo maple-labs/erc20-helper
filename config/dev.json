@@ -1,0 +1,28 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "src/ERC20Helper.sol": {
+      "urls": ["src/ERC20Helper.sol"]
+    },
+    "src/test/ERC20Helper.t.sol": {
+      "urls": ["src/test/ERC20Helper.t.sol"]
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "metadata",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.gasEstimates"
+        ],
+        "": ["ast"]
+      }
+    }
+  }
+}
