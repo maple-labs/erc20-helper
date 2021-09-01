@@ -1,42 +1,32 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 pragma solidity ^0.8.7;
 
-//@title Small Library to standardize erc20 token interactions
+import { IERC20 } from "../lib/erc20/src/interfaces/IERC20.sol";
+
+///@title Small Library to standardize erc20 token interactions
 library ERC20Helper {
 
     /**************************/
     /*** Internal Functions ***/
     /**************************/
-    function transferHelper(
-        address token,
-        address to,
-        uint256 amount
-    ) internal {
-        _call(token, abi.encodeWithSignature("transfer(address,uint256)", to, amount));
+
+    function transfer(address token, address to, uint256 amount) internal returns (bool) {
+        return _call(token, abi.encodeWithSelector(IERC20.transfer.selector, to, amount));
     }
 
-    function transferFromHelper(
-        address token,
-        address from,
-        address to,
-        uint256 amount
-    ) internal {
-        _call(token, abi.encodeWithSignature("transferFrom(address,address,uint256)", from, to, amount));
+    function transferFrom(address token, address from, address to, uint256 amount) internal returns (bool) {
+        return _call(token, abi.encodeWithSelector(IERC20.transferFrom.selector, from, to, amount));
     }
 
-    function approveHelper(
-        address token,
-        address spender,
-        uint256 amount
-    ) internal {
-        _call(token, abi.encodeWithSignature("approve(address,uint256)", spender, amount));
+    function approve(address token, address spender, uint256 amount) internal returns (bool) {
+        return _call(token, abi.encodeWithSelector(IERC20.approve.selector, spender, amount));
     }
 
-    function _call(address token, bytes memory data) private {
-        (bool ok, bytes memory returnData) = token.call(data);
+    function _call(address token, bytes memory data) private returns (bool success) {
+        bytes memory returnData;
+        (success, returnData) = token.call(data);
 
-        require(ok);
-
-        if (returnData.length > 0) require(abi.decode(returnData, (bool)));
+        return success && (returnData.length == 0 || abi.decode(returnData, (bool)));
     }
+
 }
