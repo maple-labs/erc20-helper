@@ -3,7 +3,7 @@ pragma solidity ^0.8.7;
 
 import { IERC20 } from "../lib/erc20/src/interfaces/IERC20.sol";
 
-///@title Small Library to standardize erc20 token interactions
+/// @title Small Library to standardize erc20 token interactions
 library ERC20Helper {
 
     /**************************/
