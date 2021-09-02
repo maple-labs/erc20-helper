@@ -3,9 +3,9 @@ pragma solidity ^0.8.7;
 
 import { DSTest } from "../../lib/ds-test/src/test.sol";
 
-import { ERC20TrueReturner, ERC20FalseReturner, ERC20NoReturner, ERC20Reverter }  from "./mocks/ERC20Mocks.sol";
-
 import { ERC20Helper } from "../ERC20Helper.sol";
+
+import { ERC20TrueReturner, ERC20FalseReturner, ERC20NoReturner, ERC20Reverter } from "./mocks/ERC20Mocks.sol";
 
 contract ERC20HelperTest is DSTest {
     
@@ -21,35 +21,52 @@ contract ERC20HelperTest is DSTest {
         reverter      = new ERC20Reverter();
     }
 
-    function prove_trasfer(address to, uint256 amount) public {
-        ERC20Helper.transferHelper(address(trueReturner), to, amount);
-        ERC20Helper.transferHelper(address(noReturner),   to, amount);
+    function prove_transfer_trueReturner(address to, uint256 amount) public {
+        require(ERC20Helper.transfer(address(trueReturner), to, amount));
     }
 
-    function prove_trasferFrom(address from, address to, uint256 amount) public {
-        ERC20Helper.transferFromHelper(address(trueReturner), from, to, amount);
-        ERC20Helper.transferFromHelper(address(noReturner),   from, to, amount);
+    function prove_transfer_noReturner(address to, uint256 amount) public {
+        require(ERC20Helper.transfer(address(noReturner), to, amount));
     }
 
-    function prove_approve(address to, uint256 amount) public {
-        ERC20Helper.approveHelper(address(trueReturner), to, amount);
-        ERC20Helper.approveHelper(address(noReturner),   to, amount);
+    function prove_transferFrom_trueReturner(address from, address to, uint256 amount) public {
+        require(ERC20Helper.transferFrom(address(trueReturner), from, to, amount));
     }
 
-    function proveFail_trasfer_reverter(address to, uint256 amount) public {
-        ERC20Helper.transferHelper(address(falseReturner), to, amount);
-        ERC20Helper.transferHelper(address(reverter),      to, amount);
+    function prove_transferFrom_noReturner(address from, address to, uint256 amount) public {
+        require(ERC20Helper.transferFrom(address(noReturner), from, to, amount));
     }
 
-    function proveFail_trasferFrom_reverter(address from, address to, uint256 amount) public {
-        ERC20Helper.transferFromHelper(address(falseReturner), from, to, amount);
-        ERC20Helper.transferFromHelper(address(reverter),      from, to, amount);
+    function prove_approve_trueReturner(address to, uint256 amount) public {
+        require(ERC20Helper.approve(address(trueReturner), to, amount));
+    }
+
+    function prove_approve_noReturner(address to, uint256 amount) public {
+        require(ERC20Helper.approve(address(noReturner), to, amount));
+    }
+
+    function proveFail_transfer_falseReturner(address to, uint256 amount) public {
+        require(ERC20Helper.transfer(address(falseReturner), to, amount));
+    }
+
+    function proveFail_transfer_reverter(address to, uint256 amount) public {
+        require(ERC20Helper.transfer(address(reverter), to, amount));
+    }
+
+    function proveFail_transferFrom_falseReturner(address from, address to, uint256 amount) public {
+        require(ERC20Helper.transferFrom(address(falseReturner), from, to, amount));
+    }
+
+    function proveFail_transferFrom_reverter(address from, address to, uint256 amount) public {
+        require(ERC20Helper.transferFrom(address(reverter), from, to, amount));
+    }
+
+    function proveFail_approve_falseReturner(address to, uint256 amount) public {
+        require(ERC20Helper.approve(address(falseReturner), to, amount));
     }
 
     function proveFail_approve_reverter(address to, uint256 amount) public {
-        ERC20Helper.approveHelper(address(falseReturner), to, amount);
-        ERC20Helper.approveHelper(address(reverter),      to, amount);
+        require(ERC20Helper.approve(address(reverter), to, amount));
     }
+
 }
-
-
