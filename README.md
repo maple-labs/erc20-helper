@@ -1,4 +1,6 @@
 # ERC20 Helper
+**DISCLAIMER: This code has NOT been externally audited and is actively being developed. Please do not use in production.**
+
 Basic library designed to be used as a middleware between general smart contracts diverse erc20 tokens. It standardizes the behaviours of all commonly used implementations. 
 
 To clone, set up and run tests:
@@ -13,3 +15,9 @@ These contracts were inspired by and/or directly modified from the following sou
 - [Solmate](https://github.com/Rari-Capital/solmate)
 - [OpenZeppelin](https://github.com/OpenZeppelin/openzeppelin-contracts)
 - [DSS](https://github.com/makerdao/dss)
+
+---
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/44272939/116272804-33e78d00-a74f-11eb-97ab-77b7e13dc663.png" height="100" />
+</p>
