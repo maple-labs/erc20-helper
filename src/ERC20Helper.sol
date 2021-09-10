@@ -6,7 +6,7 @@ import { IERC20 } from "../lib/erc20/src/interfaces/IERC20.sol";
 /**
  * @title Small Library to standardize erc20 token interactions. 
  * @dev   Code taken from https://github.com/maple-labs/erc20-helper
- * @dev   Acknowledgements to Solmate, OpenZeppelin, and Uniswap for inspiring this code.
+ * @dev   Acknowledgements to Solmate, OpenZeppelin, and Uniswap-V3 for inspiring this code.
  */
 library ERC20Helper {
 
