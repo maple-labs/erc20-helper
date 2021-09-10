@@ -1,5 +1,7 @@
 # ERC20 Helper
 
+[![CircleCI](https://circleci.com/gh/maple-labs/erc20-helper/tree/main.svg?style=svg)](https://circleci.com/gh/maple-labs/erc20-helper/tree/main) [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+
 **DISCLAIMER: This code has NOT been externally audited and is actively being developed. Please do not use in production without taking the appropriate steps to ensure maximum security.**
 
 Basic library designed to be used as a middleware between general smart contracts diverse erc20 tokens. It standardizes the behaviours of all commonly used implementations.
