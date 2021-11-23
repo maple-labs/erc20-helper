@@ -4,7 +4,7 @@ pragma solidity ^0.8.7;
 import { IERC20 } from "../lib/erc20/src/interfaces/IERC20.sol";
 
 /**
- * @title Small Library to standardize erc20 token interactions. 
+ * @title Small Library to standardize erc20 token interactions.
  * @dev   Code taken from https://github.com/maple-labs/erc20-helper
  * @dev   Acknowledgements to Solmate, OpenZeppelin, and Uniswap-V3 for inspiring this code.
  */
@@ -27,6 +27,14 @@ library ERC20Helper {
     }
 
     function _call(address token, bytes memory data) private returns (bool success) {
+        uint256 size;
+
+        assembly {
+            size := extcodesize(token)
+        }
+
+        if (size == uint256(0)) return false;
+
         bytes memory returnData;
         (success, returnData) = token.call(data);
 
