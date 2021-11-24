@@ -7,9 +7,9 @@
 Basic library designed to be used as a middleware between general smart contracts diverse erc20 tokens. It standardizes the behaviours of all commonly used implementations.
 
 Note, unlike other similar libraries, this  library does not revert on failures, so it can be more flexible for contracts that:
-- want to choose their own revert strings, or none at all (i.e. `require(ERC20Helper.transfer(asset, msg.sender, amount), "FOO:FAILED_TRANSFER");`)
-- want to use the returns as booleans (i.e. `require(ERC20Helper.transfer(asset1, msg.sender, amount) || ERC20Helper.transfer(asset2, msg.sender, amount));`);
-- do not care about the result of a transfer
+- Want to choose their own revert strings, or none at all (i.e. `require(ERC20Helper.transfer(asset, msg.sender, amount), "FOO:FAILED_TRANSFER");`).
+- Want to use the returns as booleans (i.e. `require(ERC20Helper.transfer(asset1, msg.sender, amount) || ERC20Helper.transfer(asset2, msg.sender, amount));`).
+- Do not care about the result of a transfer.
 
 To clone, set up and run tests:
 
