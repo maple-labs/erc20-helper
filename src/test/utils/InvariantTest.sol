@@ -2,7 +2,7 @@
 pragma solidity ^0.8.7;
 
 contract InvariantTest {
-    
+
     address[] private targetContracts_;
 
     function targetContracts() public view returns (address[] memory) {

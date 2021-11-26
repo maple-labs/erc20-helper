@@ -8,7 +8,7 @@ import { ERC20Helper } from "../ERC20Helper.sol";
 import { ERC20TrueReturner, ERC20FalseReturner, ERC20NoReturner, ERC20Reverter } from "./mocks/ERC20Mocks.sol";
 
 contract ERC20HelperTest is DSTest {
-    
+
     ERC20FalseReturner falseReturner;
     ERC20TrueReturner  trueReturner;
     ERC20NoReturner    noReturner;
@@ -53,6 +53,10 @@ contract ERC20HelperTest is DSTest {
         require(ERC20Helper.transfer(address(reverter), to, amount));
     }
 
+    function proveFail_transfer_notContract(address to, uint256 amount) public {
+        require(ERC20Helper.transfer(address(1), to, amount));
+    }
+
     function proveFail_transferFrom_falseReturner(address from, address to, uint256 amount) public {
         require(ERC20Helper.transferFrom(address(falseReturner), from, to, amount));
     }
@@ -61,12 +65,20 @@ contract ERC20HelperTest is DSTest {
         require(ERC20Helper.transferFrom(address(reverter), from, to, amount));
     }
 
+    function proveFail_transferFrom_notContract(address from, address to, uint256 amount) public {
+        require(ERC20Helper.transferFrom(address(1), from, to, amount));
+    }
+
     function proveFail_approve_falseReturner(address to, uint256 amount) public {
         require(ERC20Helper.approve(address(falseReturner), to, amount));
     }
 
     function proveFail_approve_reverter(address to, uint256 amount) public {
         require(ERC20Helper.approve(address(reverter), to, amount));
+    }
+
+    function proveFail_approve_notContract(address to, uint256 amount) public {
+        require(ERC20Helper.approve(address(1), to, amount));
     }
 
 }
