@@ -14,31 +14,33 @@ library ERC20Helper {
     /*** Internal Functions ***/
     /**************************/
 
-    function transfer(address token, address to, uint256 amount) internal returns (bool) {
-        return _call(token, abi.encodeWithSelector(IERC20Like.transfer.selector, to, amount));
+    function transfer(address token_, address to_, uint256 amount_) internal returns (bool success_) {
+        return _call(token_, abi.encodeWithSelector(IERC20Like.transfer.selector, to_, amount_));
     }
 
-    function transferFrom(address token, address from, address to, uint256 amount) internal returns (bool) {
-        return _call(token, abi.encodeWithSelector(IERC20Like.transferFrom.selector, from, to, amount));
+    function transferFrom(address token_, address from_, address to_, uint256 amount_) internal returns (bool success_) {
+        return _call(token_, abi.encodeWithSelector(IERC20Like.transferFrom.selector, from_, to_, amount_));
     }
 
-    function approve(address token, address spender, uint256 amount) internal returns (bool) {
-        return _call(token, abi.encodeWithSelector(IERC20Like.approve.selector, spender, amount));
+    function approve(address token_, address spender_, uint256 amount_) internal returns (bool success_) {
+        return
+            _call(token_, abi.encodeWithSelector(IERC20Like.approve.selector, spender_, uint256(0))) &&
+            _call(token_, abi.encodeWithSelector(IERC20Like.approve.selector, spender_, amount_));
     }
 
-    function _call(address token, bytes memory data) private returns (bool success) {
+    function _call(address token_, bytes memory data_) private returns (bool success_) {
         uint256 size;
 
         assembly {
-            size := extcodesize(token)
+            size := extcodesize(token_)
         }
 
         if (size == uint256(0)) return false;
 
         bytes memory returnData;
-        (success, returnData) = token.call(data);
+        ( success_, returnData ) = token_.call(data_);
 
-        return success && (returnData.length == 0 || abi.decode(returnData, (bool)));
+        return success_ && (returnData.length == 0 || abi.decode(returnData, (bool)));
     }
 
 }
