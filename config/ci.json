@@ -1,29 +1,29 @@
 {
-  "language": "Solidity",
-  "sources": {
-    "src/ERC20Helper.sol": {
-      "urls": ["src/ERC20Helper.sol"]
+    "language": "Solidity",
+    "sources": {
+        "src/ERC20Helper.sol": {
+            "urls": ["src/ERC20Helper.sol"]
+        },
+        "src/test/ERC20Helper.t.sol": {
+            "urls": ["src/test/ERC20Helper.t.sol"]
+        }
     },
-    "src/test/ERC20Helper.t.sol": {
-      "urls": ["src/test/ERC20Helper.t.sol"]
+    "settings": {
+        "optimizer": {
+            "enabled": true,
+            "runs": 200
+        },
+        "outputSelection": {
+            "*": {
+                "*": [
+                    "abi",
+                    "evm.bytecode",
+                    "evm.deployedBytecode"
+                ],
+                "": [
+                    "ast"
+                ]
+            }
+        }
     }
-  },
-  "settings": {
-    "optimizer": {
-      "enabled": true,
-      "runs": 200
-    },
-    "outputSelection": {
-      "*": {
-        "*": [
-          "abi",
-          "evm.bytecode",
-          "evm.deployedBytecode"
-        ],
-        "": [
-          "ast"
-        ]
-      }
-    }
-  }
 }
