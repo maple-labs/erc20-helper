@@ -1,7 +1,7 @@
-name: safe-erc20
+name: erc2-helper
 version: 1.0.0
 source: src
 packages:
-  - path: src/SafeERC20.sol
-    contractName: SafeERC20
-customDescription: SafeERC-20 Artifacts and ABIs
+  - path: src/ERC20Helper.sol
+    contractName: ERC20Helper
+customDescription: ERC20Helper Artifacts and ABIs
