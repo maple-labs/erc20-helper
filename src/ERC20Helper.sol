@@ -22,7 +22,14 @@ library ERC20Helper {
         return _call(token, abi.encodeWithSelector(IERC20Like.transferFrom.selector, from, to, amount));
     }
 
-    function approve(address token, address spender, uint256 amount) internal returns (bool) {
+    function approve(address token, address spender, uint256 amount) internal returns (bool success) {
+        // If setting approval to zero fails, return false.
+        if (!_call(token, abi.encodeWithSelector(IERC20Like.approve.selector, spender, uint256(0)))) return false;
+
+        // If `amount` is zero, return true as the previous step already did this.
+        if (amount == uint256(0)) return true;
+
+        // Return the result of setting the approval to `amount`.
         return _call(token, abi.encodeWithSelector(IERC20Like.approve.selector, spender, amount));
     }
 
