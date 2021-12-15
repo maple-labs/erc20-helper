@@ -34,13 +34,7 @@ library ERC20Helper {
     }
 
     function _call(address token_, bytes memory data_) private returns (bool success_) {
-        uint256 size;
-
-        assembly {
-            size := extcodesize(token_)
-        }
-
-        if (size == uint256(0)) return false;
+        if (token_.code.length == 0) return false;
 
         bytes memory returnData;
         ( success_, returnData ) = token_.call(data_);
