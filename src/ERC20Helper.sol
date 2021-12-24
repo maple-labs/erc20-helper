@@ -5,8 +5,6 @@ import { IERC20Like } from "./interfaces/IERC20Like.sol";
 
 /**
  * @title Small Library to standardize erc20 token interactions.
- * @dev   Code taken from https://github.com/maple-labs/erc20-helper
- * @dev   Acknowledgements to Solmate, OpenZeppelin, and Uniswap-V3 for inspiring this code.
  */
 library ERC20Helper {
 
@@ -34,12 +32,12 @@ library ERC20Helper {
     }
 
     function _call(address token_, bytes memory data_) private returns (bool success_) {
-        if (token_.code.length == 0) return false;
+        if (token_.code.length == uint256(0)) return false;
 
         bytes memory returnData;
         ( success_, returnData ) = token_.call(data_);
 
-        return success_ && (returnData.length == 0 || abi.decode(returnData, (bool)));
+        return success_ && (returnData.length == uint256(0) || abi.decode(returnData, (bool)));
     }
 
 }
