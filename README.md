@@ -18,6 +18,11 @@ git clone git@github.com:maple-labs/erc20-helper.git
 dapp update
 make test
 ```
+## Audit Reports
+| Auditor | Report link |
+|---|---|
+| Trail of Bits | [ToB - Dec 28, 2021](https://docs.google.com/viewer?url=https://github.com/maple-labs/maple-core/files/7847684/Maple.Finance.-.Final.Report_v3.pdf) |
+| Code 4rena | [C4 - Jan 5, 2022](https://code4rena.com/reports/2021-12-maple/) |
 
 ## Acknowledgements
 
