@@ -6,7 +6,7 @@
 
 **WARNING: Unlike other similar libraries, this  library does NOT REVERT ON FAILURES. Any contracts that inherit this code that expect the reversion to occur in this contract can have UNINTENDED AND POTENTIALLY CATASTROPHIC CONSEQUENCES.** 
 
-ERC20Helper is a basic library designed to be used as a middleware between general smart contracts diverse erc20 tokens. It standardizes the behaviours of all commonly used implementations.
+ERC20Helper is a basic library designed to be used as a middleware between general smart contracts and diverse ERC-20 tokens. It standardizes the behaviours of all commonly used implementations.
 
 The decision to intentionally not revert was so that this library can be more flexible for contracts that:
 - Want to choose their own revert strings, or none at all (i.e. `require(ERC20Helper.transfer(asset, msg.sender, amount), "FOO:FAILED_TRANSFER");`).
