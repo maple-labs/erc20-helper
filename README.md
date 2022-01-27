@@ -33,6 +33,16 @@ This project was built using [dapptools](https://github.com/dapphub/dapptools).
 | Trail of Bits | [ToB - Dec 28, 2021](https://docs.google.com/viewer?url=https://github.com/maple-labs/maple-core/files/7847684/Maple.Finance.-.Final.Report_v3.pdf) |
 | Code 4rena | [C4 - Jan 5, 2022](https://code4rena.com/reports/2021-12-maple/) |
 
+## Bug Bounty
+
+For all information related to the ongoing bug bounty for these contracts run by [Immunefi](https://immunefi.com/), please visit this [site](https://immunefi.com/bounty/maple/). 
+
+| Severity of Finding | Payout |
+|---|---|
+| Critical | $50,000 |
+| High | $25,000 |
+| Medium | $1,000 |
+
 ## Acknowledgements
 
 These contracts were inspired by and/or directly modified from the following sources:
