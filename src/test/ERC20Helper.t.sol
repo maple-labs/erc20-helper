@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 pragma solidity ^0.8.7;
 
-import { DSTest } from "../../lib/ds-test/src/test.sol";
+import { TestUtils } from "../../lib/contract-test-utils/contracts/test.sol";
 
 import { ERC20Helper } from "../ERC20Helper.sol";
 
 import { ERC20TrueReturner, ERC20FalseReturner, ERC20NoReturner, ERC20Reverter } from "./mocks/ERC20Mocks.sol";
 
-contract ERC20HelperTest is DSTest {
+contract ERC20HelperTest is TestUtils {
 
     ERC20FalseReturner falseReturner;
     ERC20TrueReturner  trueReturner;
