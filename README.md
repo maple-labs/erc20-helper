@@ -4,7 +4,7 @@
 
 **DISCLAIMER: Please do not use in production without taking the appropriate steps to ensure maximum security.**
 
-**WARNING: Unlike other similar libraries, this  library does NOT REVERT ON FAILURES. Any contracts that inherit this code that expect the reversion to occur in this contract can have UNINTENDED AND POTENTIALLY CATASTROPHIC CONSEQUENCES.** 
+**WARNING: Unlike other similar libraries, this  library does NOT REVERT ON FAILURES. Any contracts that inherit this code that expect the reversion to occur in this contract can have UNINTENDED AND POTENTIALLY CATASTROPHIC CONSEQUENCES.**
 
 ERC20Helper is a basic library designed to be used as a middleware between general smart contracts and diverse ERC-20 tokens. It standardizes the behaviours of all commonly used implementations.
 
@@ -37,7 +37,7 @@ This project was built using [dapptools](https://github.com/dapphub/dapptools).
 
 ## Bug Bounty
 
-For all information related to the ongoing bug bounty for these contracts run by [Immunefi](https://immunefi.com/), please visit this [site](https://immunefi.com/bounty/maple/). 
+For all information related to the ongoing bug bounty for these contracts run by [Immunefi](https://immunefi.com/), please visit this [site](https://immunefi.com/bounty/maple/).
 
 | Severity of Finding | Payout |
 |---|---|
@@ -56,5 +56,6 @@ These contracts were inspired by and/or directly modified from the following sou
 ---
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/44272939/116272804-33e78d00-a74f-11eb-97ab-77b7e13dc663.png" height="100" />
+  <img src="https://user-images.githubusercontent.com/44272939/196706799-fe96d294-f700-41e7-a65f-2d754d0a6eac.gif" height="100" />
 </p>
+
