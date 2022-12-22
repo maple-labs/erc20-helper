@@ -8,9 +8,9 @@ import { IERC20Like } from "./interfaces/IERC20Like.sol";
  */
 library ERC20Helper {
 
-    /**************************/
-    /*** Internal Functions ***/
-    /**************************/
+    /**************************************************************************************************************************************/
+    /*** Internal Functions                                                                                                             ***/
+    /**************************************************************************************************************************************/
 
     function transfer(address token_, address to_, uint256 amount_) internal returns (bool success_) {
         return _call(token_, abi.encodeWithSelector(IERC20Like.transfer.selector, to_, amount_));

@@ -9,10 +9,10 @@ import { ERC20TrueReturner, ERC20FalseReturner, ERC20NoReturner, ERC20Reverter }
 
 contract ERC20HelperTest is TestUtils {
 
-    ERC20FalseReturner falseReturner;
-    ERC20TrueReturner  trueReturner;
-    ERC20NoReturner    noReturner;
-    ERC20Reverter      reverter;
+    ERC20FalseReturner internal falseReturner;
+    ERC20TrueReturner  internal trueReturner;
+    ERC20NoReturner    internal noReturner;
+    ERC20Reverter      internal reverter;
 
     function setUp() public {
         falseReturner = new ERC20FalseReturner();

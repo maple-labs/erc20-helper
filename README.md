@@ -6,6 +6,8 @@
 
 **WARNING: Unlike other similar libraries, this  library does NOT REVERT ON FAILURES. Any contracts that inherit this code that expect the reversion to occur in this contract can have UNINTENDED AND POTENTIALLY CATASTROPHIC CONSEQUENCES.**
 
+## Overview
+
 ERC20Helper is a basic library designed to be used as a middleware between general smart contracts and diverse ERC-20 tokens. It standardizes the behaviours of all commonly used implementations.
 
 The decision to intentionally not revert was so that this library can be more flexible for contracts that:
@@ -13,21 +15,23 @@ The decision to intentionally not revert was so that this library can be more fl
 - Want to use the returns as booleans (i.e. `require(ERC20Helper.transfer(asset1, msg.sender, amount) || ERC20Helper.transfer(asset2, msg.sender, amount));`).
 - Do not care about the result of a transfer.
 
-## Testing and Development
-### Setup
+## Setup
+
+This project was built using [dapptools](https://github.com/dapphub/dapptools).
+
 ```sh
 git clone git@github.com:maple-labs/erc20-helper.git
 cd erc20-helper
 dapp update
-make test
 ```
+
 ### Running Tests
+
 - To run all tests: `make test` (runs `./test.sh`)
 - To run a specific test function: `./test.sh -t <test_name>` (e.g., `./test.sh -t test_fundLoan`)
 
-This project was built using [dapptools](https://github.com/dapphub/dapptools).
-
 ## Audit Reports
+
 | Auditor | Report link |
 |---|---|
 | Trail of Bits | [ToB - Dec 28, 2021](https://docs.google.com/viewer?url=https://github.com/maple-labs/maple-core/files/7847684/Maple.Finance.-.Final.Report_v3.pdf) |
@@ -38,12 +42,6 @@ This project was built using [dapptools](https://github.com/dapphub/dapptools).
 ## Bug Bounty
 
 For all information related to the ongoing bug bounty for these contracts run by [Immunefi](https://immunefi.com/), please visit this [site](https://immunefi.com/bounty/maple/).
-
-| Severity of Finding | Payout |
-|---|---|
-| Critical | $50,000 |
-| High | $25,000 |
-| Medium | $1,000 |
 
 ## Acknowledgements
 
@@ -58,4 +56,3 @@ These contracts were inspired by and/or directly modified from the following sou
 <p align="center">
   <img src="https://user-images.githubusercontent.com/44272939/196706799-fe96d294-f700-41e7-a65f-2d754d0a6eac.gif" height="100" />
 </p>
-
