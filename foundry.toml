@@ -1,0 +1,13 @@
+[profile.default]
+src       = "src"
+out       = "out"
+libs      = ["lib"]
+verbosity = 3
+
+[fuzz]
+runs = 5_000
+
+[profile.ci.fuzz]
+runs = 2_500_000
+
+# See more config options https://github.com/foundry-rs/foundry/tree/master/config

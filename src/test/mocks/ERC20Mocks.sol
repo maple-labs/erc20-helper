@@ -3,15 +3,15 @@ pragma solidity ^0.8.7;
 
 contract ERC20TrueReturner {
 
-    function transfer(address to_, uint256 value_) external pure returns (bool success_) {
+    function transfer(address, uint256) external pure returns (bool) {
         return true;
     }
 
-    function transferFrom(address from_, address to_, uint256 value_) external pure returns (bool success_) {
+    function transferFrom(address, address, uint256) external pure returns (bool) {
         return true;
     }
 
-    function approve(address to_, uint256 value_) external pure returns (bool success_) {
+    function approve(address, uint256) external pure returns (bool) {
         return true;
     }
 
@@ -19,15 +19,15 @@ contract ERC20TrueReturner {
 
 contract ERC20FalseReturner {
 
-    function transfer(address to_, uint256 value_) external pure returns (bool success_) {
+    function transfer(address, uint256) external pure returns (bool) {
         return false;
     }
 
-    function transferFrom(address from_, address to_, uint256 value_) external pure returns (bool success_) {
+    function transferFrom(address, address, uint256) external pure returns (bool) {
         return false;
     }
 
-    function approve(address to_, uint256 value_) external pure returns (bool success_) {
+    function approve(address, uint256) external pure returns (bool) {
         return false;
     }
 
@@ -35,25 +35,25 @@ contract ERC20FalseReturner {
 
 contract ERC20NoReturner {
 
-    function transfer(address to_, uint256 value_) external {}
+    function transfer(address, uint256) external {}
 
-    function transferFrom(address from_, address to_, uint256 value_) external {}
+    function transferFrom(address, address, uint256) external {}
 
-    function approve(address to_, uint256 value_) external {}
+    function approve(address, uint256) external {}
 
 }
 
 contract ERC20Reverter {
 
-    function transfer(address to_, uint256 value_) external pure returns (bool success_) {
+    function transfer(address, uint256) external pure returns (bool) {
         require(false);
     }
 
-    function transferFrom(address from_, address to_, uint256 value_) external pure returns (bool success_) {
+    function transferFrom(address, address, uint256) external pure returns (bool) {
         require(false);
     }
 
-    function approve(address to_, uint256 value_) external pure returns (bool success_) {
+    function approve(address, uint256) external pure returns (bool) {
         require(false);
     }
 
