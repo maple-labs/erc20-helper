@@ -16,18 +16,18 @@ import { IERC20 } from "./IERC20.sol";
 
 contract ERC20HelperTest is TestUtils {
 
-    using ERC20Helper for IERC20;
+    using ERC20Helper for address;
 
-    IERC20 internal falseReturner;
-    IERC20 internal trueReturner;
-    IERC20 internal noReturner;
-    IERC20 internal reverter;
+    address internal falseReturner;
+    address internal trueReturner;
+    address internal noReturner;
+    address internal reverter;
 
     function setUp() public {
-        falseReturner = IERC20(address(new ERC20FalseReturner()));
-        trueReturner  = IERC20(address(new ERC20TrueReturner()));
-        noReturner    = IERC20(address(new ERC20NoReturner()));
-        reverter      = IERC20(address(new ERC20Reverter()));
+        falseReturner = address(new ERC20FalseReturner());
+        trueReturner  = address(new ERC20TrueReturner());
+        noReturner    = address(new ERC20NoReturner());
+        reverter      = address(new ERC20Reverter());
     }
 
     function testFuzz_transfer_trueReturner(address to, uint256 amount) public {
@@ -35,63 +35,63 @@ contract ERC20HelperTest is TestUtils {
     }
 
     function testFuzz_transfer_noReturner(address to, uint256 amount) public {
-        assertTrue(ERC20Helper.transfer(address(noReturner), to, amount));
+        assertTrue(noReturner.safeTransfer(to, amount));
     }
 
     function testFuzz_transferFrom_trueReturner(address from, address to, uint256 amount) public {
-        assertTrue(ERC20Helper.transferFrom(address(trueReturner), from, to, amount));
+        assertTrue(trueReturner.safeTransferFrom(from, to, amount));
     }
 
     function testFuzz_transferFrom_noReturner(address from, address to, uint256 amount) public {
-        assertTrue(ERC20Helper.transferFrom(address(noReturner), from, to, amount));
+        assertTrue(noReturner.safeTransferFrom(from, to, amount));
     }
 
     function testFuzz_approve_trueReturner(address to, uint256 amount) public {
-        assertTrue(ERC20Helper.approve(address(trueReturner), to, amount));
+        assertTrue(trueReturner.safeApprove(to, amount));
     }
 
     function testFuzz_approve_noReturner(address to, uint256 amount) public {
-        assertTrue(ERC20Helper.approve(address(noReturner), to, amount));
+        assertTrue(noReturner.safeApprove(to, amount));
     }
 
     function testFuzz_fail_transfer_falseReturner(address to, uint256 amount) public {
-        assertTrue(!ERC20Helper.transfer(address(falseReturner), to, amount));
+        assertTrue(!falseReturner.safeTransfer(to, amount));
     }
 
     function testFuzz_fail_transfer_reverter(address to, uint256 amount) public {
-        assertTrue(!ERC20Helper.transfer(address(reverter), to, amount));
+        assertTrue(!reverter.safeTransfer(to, amount));
     }
 
     function testFuzz_fail_transfer_notContract(address to, uint256 amount) public {
-        assertTrue(!ERC20Helper.transfer(address(1), to, amount));
+        assertTrue(!address(1).safeTransfer(to, amount));
     }
 
     function testFuzz_fail_transferFrom_falseReturner(address from, address to, uint256 amount)
         public
     {
-        assertTrue(!ERC20Helper.transferFrom(address(falseReturner), from, to, amount));
+        assertTrue(!falseReturner.safeTransferFrom(from, to, amount));
     }
 
     function testFuzz_fail_transferFrom_reverter(address from, address to, uint256 amount) public {
-        assertTrue(!ERC20Helper.transferFrom(address(reverter), from, to, amount));
+        assertTrue(!reverter.safeTransferFrom(from, to, amount));
     }
 
     function testFuzz_fail_transferFrom_notContract(address from, address to, uint256 amount)
         public
     {
-        assertTrue(!ERC20Helper.transferFrom(address(1), from, to, amount));
+        assertTrue(!address(1).safeTransferFrom(from, to, amount));
     }
 
     function testFuzz_fail_approve_falseReturner(address to, uint256 amount) public {
-        assertTrue(!ERC20Helper.approve(address(falseReturner), to, amount));
+        assertTrue(!falseReturner.safeApprove(to, amount));
     }
 
     function testFuzz_fail_approve_reverter(address to, uint256 amount) public {
-        assertTrue(!ERC20Helper.approve(address(reverter), to, amount));
+        assertTrue(!reverter.safeApprove(to, amount));
     }
 
     function testFuzz_fail_approve_notContract(address to, uint256 amount) public {
-        assertTrue(!ERC20Helper.approve(address(1), to, amount));
+        assertTrue(!address(1).safeApprove(to, amount));
     }
 
 }

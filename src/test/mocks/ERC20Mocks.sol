@@ -45,15 +45,18 @@ contract ERC20NoReturner {
 
 contract ERC20Reverter {
 
-    function transfer(address, uint256) external pure returns (bool) {
+    function transfer(address, uint256) external pure returns (bool success) {
+        success = false;
         require(false);
     }
 
-    function transferFrom(address, address, uint256) external pure returns (bool) {
+    function transferFrom(address, address, uint256) external pure returns (bool success) {
+        success = false;
         require(false);
     }
 
-    function approve(address, uint256) external pure returns (bool) {
+    function approve(address, uint256) external pure returns (bool success) {
+        success = false;
         require(false);
     }
 
