@@ -53,6 +53,10 @@ library ERC20Helper {
             = _call(token_, abi.encodeWithSelector(IERC20Like.approve.selector, spender_, amount_));
     }
 
+    /**********************************************************************************************/
+    /*** Private Functions                                                                      ***/
+    /**********************************************************************************************/
+
     function _call(address token_, bytes memory data_) private returns (bool success_) {
         if (token_.code.length == uint256(0)) return false;
 

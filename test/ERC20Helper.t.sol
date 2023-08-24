@@ -12,8 +12,6 @@ import {
     ERC20Reverter
 } from "./mocks/ERC20Mocks.sol";
 
-import { IERC20 } from "./IERC20.sol";
-
 contract ERC20HelperTest is Test {
 
     using ERC20Helper for address;
