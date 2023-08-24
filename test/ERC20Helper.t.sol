@@ -28,67 +28,81 @@ contract ERC20HelperTest is Test {
         reverter      = address(new ERC20Reverter());
     }
 
-    function testFuzz_transfer_trueReturner(address to, uint256 amount) public {
+    /**********************************************************************************************/
+    /*** `safeTransfer` Tests                                                                   ***/
+    /**********************************************************************************************/
+
+    function testFuzz_safeTransfer_trueReturner(address to, uint256 amount) public {
         assertTrue(trueReturner.safeTransfer(to, amount));
     }
 
-    function testFuzz_transfer_noReturner(address to, uint256 amount) public {
+    function testFuzz_safeTransfer_noReturner(address to, uint256 amount) public {
         assertTrue(noReturner.safeTransfer(to, amount));
     }
 
-    function testFuzz_transferFrom_trueReturner(address from, address to, uint256 amount) public {
-        assertTrue(trueReturner.safeTransferFrom(from, to, amount));
-    }
-
-    function testFuzz_transferFrom_noReturner(address from, address to, uint256 amount) public {
-        assertTrue(noReturner.safeTransferFrom(from, to, amount));
-    }
-
-    function testFuzz_approve_trueReturner(address to, uint256 amount) public {
-        assertTrue(trueReturner.safeApprove(to, amount));
-    }
-
-    function testFuzz_approve_noReturner(address to, uint256 amount) public {
-        assertTrue(noReturner.safeApprove(to, amount));
-    }
-
-    function testFuzz_fail_transfer_falseReturner(address to, uint256 amount) public {
+    function testFuzz_safeTransfer_falseReturner(address to, uint256 amount) public {
         assertTrue(!falseReturner.safeTransfer(to, amount));
     }
 
-    function testFuzz_fail_transfer_reverter(address to, uint256 amount) public {
+    function testFuzz_safeTransfer_reverter(address to, uint256 amount) public {
         assertTrue(!reverter.safeTransfer(to, amount));
     }
 
-    function testFuzz_fail_transfer_notContract(address to, uint256 amount) public {
+    function testFuzz_safeTransfer_notContract(address to, uint256 amount) public {
         assertTrue(!address(1).safeTransfer(to, amount));
     }
 
-    function testFuzz_fail_transferFrom_falseReturner(address from, address to, uint256 amount)
+    /**********************************************************************************************/
+    /*** `safeTransferFrom` Tests                                                               ***/
+    /**********************************************************************************************/
+
+    function testFuzz_safeTransferFrom_trueReturner(address from, address to, uint256 amount)
+        public
+    {
+        assertTrue(trueReturner.safeTransferFrom(from, to, amount));
+    }
+
+    function testFuzz_safeTransferFrom_noReturner(address from, address to, uint256 amount) public {
+        assertTrue(noReturner.safeTransferFrom(from, to, amount));
+    }
+
+    function testFuzz_safeTransferFrom_falseReturner(address from, address to, uint256 amount)
         public
     {
         assertTrue(!falseReturner.safeTransferFrom(from, to, amount));
     }
 
-    function testFuzz_fail_transferFrom_reverter(address from, address to, uint256 amount) public {
+    function testFuzz_safeTransferFrom_reverter(address from, address to, uint256 amount) public {
         assertTrue(!reverter.safeTransferFrom(from, to, amount));
     }
 
-    function testFuzz_fail_transferFrom_notContract(address from, address to, uint256 amount)
+    function testFuzz_safeTransferFrom_notContract(address from, address to, uint256 amount)
         public
     {
         assertTrue(!address(1).safeTransferFrom(from, to, amount));
     }
 
-    function testFuzz_fail_approve_falseReturner(address to, uint256 amount) public {
+    /**********************************************************************************************/
+    /*** `safeApprove` Tests                                                                    ***/
+    /**********************************************************************************************/
+
+    function testFuzz_safeApprove_trueReturner(address to, uint256 amount) public {
+        assertTrue(trueReturner.safeApprove(to, amount));
+    }
+
+    function testFuzz_safeApprove_noReturner(address to, uint256 amount) public {
+        assertTrue(noReturner.safeApprove(to, amount));
+    }
+
+    function testFuzz_safeApprove_falseReturner(address to, uint256 amount) public {
         assertTrue(!falseReturner.safeApprove(to, amount));
     }
 
-    function testFuzz_fail_approve_reverter(address to, uint256 amount) public {
+    function testFuzz_safeApprove_reverter(address to, uint256 amount) public {
         assertTrue(!reverter.safeApprove(to, amount));
     }
 
-    function testFuzz_fail_approve_notContract(address to, uint256 amount) public {
+    function testFuzz_safeApprove_notContract(address to, uint256 amount) public {
         assertTrue(!address(1).safeApprove(to, amount));
     }
 
