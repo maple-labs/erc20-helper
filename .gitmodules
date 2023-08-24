@@ -1,3 +1,0 @@
-[submodule "lib/contract-test-utils"]
-	path = lib/contract-test-utils
-	url = https://github.com/maple-labs/contract-test-utils
