@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 pragma solidity ^0.8.7;
 
-import { TestUtils } from "../../lib/contract-test-utils/contracts/test.sol";
+import { Test } from "../lib/forge-std/src/Test.sol";
 
-import { ERC20Helper } from "../ERC20Helper.sol";
+import { ERC20Helper } from "../src/ERC20Helper.sol";
 
 import {
     ERC20TrueReturner,
@@ -14,7 +14,7 @@ import {
 
 import { IERC20 } from "./IERC20.sol";
 
-contract ERC20HelperTest is TestUtils {
+contract ERC20HelperTest is Test {
 
     using ERC20Helper for address;
 
