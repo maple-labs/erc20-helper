@@ -5,7 +5,7 @@ libs      = ["lib"]
 verbosity = 3
 
 [fuzz]
-runs = 5_000
+runs = 500
 
 [profile.ci.fuzz]
 runs = 2_500_000

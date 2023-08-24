@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 pragma solidity ^0.8.7;
 
-import { Test } from "../lib/forge-std/src/Test.sol";
+import "../lib/forge-std/src/Test.sol";
 
 import { ERC20Helper } from "../src/ERC20Helper.sol";
+
+import { IERC20Like } from "./IERC20Like.sol";
 
 import {
     ERC20TrueReturner,
@@ -16,10 +18,10 @@ contract ERC20HelperTest is Test {
 
     using ERC20Helper for address;
 
-    address internal falseReturner;
-    address internal trueReturner;
-    address internal noReturner;
-    address internal reverter;
+    address public falseReturner;
+    address public trueReturner;
+    address public noReturner;
+    address public reverter;
 
     function setUp() public {
         falseReturner = address(new ERC20FalseReturner());
@@ -104,6 +106,107 @@ contract ERC20HelperTest is Test {
 
     function testFuzz_safeApprove_notContract(address to, uint256 amount) public {
         assertTrue(!address(1).safeApprove(to, amount));
+    }
+
+}
+
+contract ERC20HelperMainnetTests is Test {
+
+    using ERC20Helper for address;
+
+    address public constant USDT = 0xdAC17F958D2ee523a2206206994597C13D831ec7;
+    address public constant USDC = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48;
+    address public constant DAI  = 0x6B175474E89094C44Da98b954EedeAC495271d0F;
+    address public constant WETH = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
+
+    address[] public tokens = [USDT, USDC, DAI, WETH];
+
+    address public from   = makeAddr("from");
+    address public to     = makeAddr("to");
+    address public caller = makeAddr("caller");
+    uint256 public amount = 1000 ether;
+
+    function setUp() external {
+        vm.createSelectFork(getChain('mainnet').rpcUrl, 17_985_000);
+    }
+
+    function test_safeTransfer() public {
+        for (uint256 i = 0; i < tokens.length; i++) {
+            deal(tokens[i], address(this), amount);
+
+            IERC20Like token = IERC20Like(tokens[i]);
+
+            assertEq(token.balanceOf(address(this)), amount);
+            assertEq(token.balanceOf(to),            0);
+
+            assertTrue(!tokens[i].safeTransfer(to, amount + 1));
+            assertTrue( tokens[i].safeTransfer(to, amount));
+
+            assertEq(token.balanceOf(address(this)), 0);
+            assertEq(token.balanceOf(to),            amount);
+        }
+    }
+
+    function test_safeTransferFrom_balanceChecks() public {
+        for (uint256 i = 0; i < tokens.length; i++) {
+            deal(tokens[i], from, amount);
+
+            vm.startPrank(from);
+            tokens[i].safeApprove(caller, amount + 1);
+            vm.stopPrank();
+
+            IERC20Like token = IERC20Like(tokens[i]);
+
+            assertEq(token.allowance(from, caller), amount + 1);
+            assertEq(token.balanceOf(from), amount);
+            assertEq(token.balanceOf(to),   0);
+
+            vm.startPrank(caller);
+            assertTrue(!tokens[i].safeTransferFrom(from, to, amount + 1));
+            assertTrue( tokens[i].safeTransferFrom(from, to, amount));
+            vm.stopPrank();
+
+            assertEq(token.allowance(from, caller), 1);
+            assertEq(token.balanceOf(from), 0);
+            assertEq(token.balanceOf(to),   amount);
+        }
+    }
+
+    function test_safeTransferFrom_approvalChecks() public {
+        for (uint256 i = 0; i < tokens.length; i++) {
+            deal(tokens[i], from, amount + 1);
+
+            vm.startPrank(from);
+            tokens[i].safeApprove(caller, amount);
+            vm.stopPrank();
+
+            IERC20Like token = IERC20Like(tokens[i]);
+
+            assertEq(token.allowance(from, caller), amount);
+            assertEq(token.balanceOf(from), amount + 1);
+            assertEq(token.balanceOf(to),   0);
+
+            vm.startPrank(caller);
+            assertTrue(!tokens[i].safeTransferFrom(from, to, amount + 1));
+            assertTrue( tokens[i].safeTransferFrom(from, to, amount));
+            vm.stopPrank();
+
+            assertEq(token.allowance(from, caller), 0);
+            assertEq(token.balanceOf(from), 1);
+            assertEq(token.balanceOf(to),   amount);
+        }
+    }
+
+    function test_safeApprove() public {
+        for (uint256 i = 0; i < tokens.length; i++) {
+            IERC20Like token = IERC20Like(tokens[i]);
+
+            assertEq(token.allowance(address(this), caller), 0);
+
+            assertTrue(tokens[i].safeApprove(caller, amount));
+
+            assertEq(token.allowance(address(this), caller), amount);
+        }
     }
 
 }
