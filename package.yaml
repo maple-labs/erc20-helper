@@ -1,8 +1,0 @@
-name: erc2-helper
-version: 1.0.0
-source: src
-packages:
-  - path: src/ERC20Helper.sol
-    contractName: ERC20Helper
-    customChecksum: 0xd7fe2d90a5d342dce7b236f581d29dd0be53ed987f2cfedb8ad5e093565cdf50
-customDescription: ERC20Helper Artifacts and ABIs

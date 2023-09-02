@@ -1,6 +1,9 @@
-/out
-hevm*
-.vscode/*
-artifacts/*
-docs/*
-metadata.json
+# Compiler files
+cache/
+out/
+
+# Test coverage
+lcov.info
+
+# Dotenv file
+.env
