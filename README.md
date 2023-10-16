@@ -39,3 +39,6 @@ These contracts were inspired by and/or directly modified from the following sou
 - [Solmate](https://github.com/Rari-Capital/solmate)
 - [OpenZeppelin](https://github.com/OpenZeppelin/openzeppelin-contracts)
 - [Uniswap-v3](https://github.com/Uniswap/uniswap-v3-core/blob/main/contracts/libraries/TransferHelper.sol)
+
+***
+*The IP in this repository was assigned to Mars SPC Limited in respect of the MarsOne SP*
