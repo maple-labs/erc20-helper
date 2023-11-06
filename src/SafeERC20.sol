@@ -14,7 +14,7 @@ library SafeERC20 {
 
     function safeTransfer(address token, address to, uint256 amount) internal {
         require(
-            _call(token, abi.encodeWithSelector(IERC20.transfer.selector, to, amount)),
+            _call(token, abi.encodeCall(IERC20.transfer, (to, amount))),
             "SafeERC20/transfer-failed"
         );
     }
@@ -25,7 +25,7 @@ library SafeERC20 {
 
     function safeTransferFrom(address token, address from, address to, uint256 amount) internal {
         require(
-            _call(token, abi.encodeWithSelector(IERC20.transferFrom.selector, from, to, amount)),
+            _call(token, abi.encodeCall(IERC20.transferFrom, (from, to, amount))),
             "SafeERC20/transfer-from-failed"
         );
     }
@@ -36,12 +36,12 @@ library SafeERC20 {
 
     function safeApprove(address token, address spender, uint256 amount) internal {
         bytes memory approvalCall
-            = abi.encodeWithSelector(IERC20.approve.selector, spender, amount);
+            = abi.encodeCall(IERC20.approve, (spender, amount));
 
         // Try to call approve with amount, if that doesn't work, set to 0 and then to amount.
         if (!_call(token, approvalCall)) {
             require(
-                _call(token, abi.encodeWithSelector(IERC20.approve.selector, spender, 0)),
+                _call(token, abi.encodeCall(IERC20.approve, (spender, 0))),
                 "SafeERC20/approve-zero-failed"
             );
             require(
